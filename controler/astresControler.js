@@ -1,4 +1,4 @@
-const connection = require('../connectionDB')
+const connection = require('../DB/connectionDB')
 
 async function getAll() {
     return await connection.getAllData(connection.astresUrl)
