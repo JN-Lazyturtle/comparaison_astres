@@ -4,8 +4,8 @@ const app = express()
 // const fs = require("fs");
 // const util = require("util");
 
-// modules internes
-const connection = require('./connectionDB')
+// controlers
+const astresControler = require('./controler/astresControler')
 
 app.listen(3000, function() {
     console.log('App listening on port 3000!')
@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 })
 
 app.get('/astres', async function(reg, res) {
-    let response = await connection.getAllData(connection.astresUrl)
+    let response = await astresControler.getAllAstres
     res.send(response)
 })
 
