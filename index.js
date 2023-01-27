@@ -1,10 +1,29 @@
+// modules externes
 const express = require('express')
 const app = express()
+// const fs = require("fs");
+// const util = require("util");
 
-app.get('/', function(req, res) {
-    res.send('Bonjour Yvan!')
-})
+// modules internes
+const connection = require('./connectionDB')
 
 app.listen(3000, function() {
     console.log('App listening on port 3000!')
 })
+
+app.get('/', function(req, res) {
+    res.send('Bienvenue sur Astres à comparer !')
+})
+
+app.get('/astres', async function(reg, res) {
+    let response = await connection.getAllData(connection.astresUrl)
+    res.send(response)
+})
+
+// app.post('/saveObject', async function(req, res) {
+//     let readFileSync = util.promisify(fs.readFileSync)
+//     let JSONdata = JSON.parse(fs.readFileSync('astres.json'))
+//     let response = await connection.saveObject(JSONdata, connection.astresUrl)
+//     res.send(response)
+// })
+
