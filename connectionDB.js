@@ -7,20 +7,39 @@ const DBconfig = {
 const astresUrl = '/astres'
 const utilisateursUrl = '/utilisateurs'
 
-function saveObject(object, collectionUrl) {
+async function saveObject(object, collectionUrl) {
     let config = DBconfig
     config.method = 'post'
     config.url = collectionUrl
     config.data = object
-    axios(config)
+    try {
+        const response = await axios(config)
+        return {
+            code: response.status,
+            message: response.statusText
+        }
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+
 }
 
 async function getAllData(collectionUrl) {
     let config = DBconfig
     config.method = 'get'
     config.url = collectionUrl
-    const response = await axios(config)
-    return response.data
+    try {
+        const response = await axios(config)
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
 }
 
 module.exports = {
