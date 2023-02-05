@@ -42,9 +42,25 @@ async function getAllData(collectionUrl) {
     }
 }
 
+async function getByID(astreID) {
+    let config = DBconfig
+    config.method = 'get'
+    config.url = astresUrl + '/' + astreID
+    try {
+        const response = await axios(config)
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+
 module.exports = {
     astresUrl: astresUrl,
     utilisateursUrl: utilisateursUrl,
     saveObject: saveObject,
-    getAllData: getAllData
+    getAllData: getAllData,
+    getByID: getByID,
 }

@@ -20,6 +20,11 @@ app.get('/astres', async function(reg, res) {
     res.send(response)
 })
 
+app.get('/astreByID/:astreID', async function(req, res) {
+    let response = await astresControler.getAstreByID(req.params.astreID)
+    res.send(response)
+})
+
 // app.post('/saveObject', async function(req, res) {
 //     let readFileSync = util.promisify(fs.readFileSync)
 //     let JSONdata = JSON.parse(fs.readFileSync('astres.json'))
