@@ -1,8 +1,8 @@
 // modules externes
 const express = require('express')
 const app = express()
-// const fs = require("fs");
-// const util = require("util");
+
+app.use(express.json())
 
 // controlers
 const astresControler = require('./controler/astresControler')
@@ -16,14 +16,12 @@ app.get('/', function(req, res) {
 })
 
 app.get('/astres', async function(reg, res) {
-    let response = await astresControler.getAllAstres
+    let response = await astresControler.getAllAstres()
     res.send(response)
 })
 
-// app.post('/saveObject', async function(req, res) {
-//     let readFileSync = util.promisify(fs.readFileSync)
-//     let JSONdata = JSON.parse(fs.readFileSync('astres.json'))
-//     let response = await connection.saveObject(JSONdata, connection.astresUrl)
-//     res.send(response)
-// })
+app.post('/astre', async function(req, res) {
+    let response = await astresControler.saveAstre(req.body)
+    res.send(response)
+})
 
