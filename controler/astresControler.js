@@ -11,7 +11,12 @@ async function saveAstre(astre) {
     return await connection.saveObject(astre, connection.astresUrl)
 }
 
+async function getAstreById(astreID) {
+    return await connection.getByID(astreID)
+}
+
 module.exports = {
     getAllAstres: getAll,
     saveAstre: saveAstre,
+    getAstreByID: getAstreById,
 }

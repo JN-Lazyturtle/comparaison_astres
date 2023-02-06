@@ -20,9 +20,15 @@ app.get('/astres', async function(reg, res) {
     res.send(response)
 })
 
+app.get('/astreByID/:astreID', async function(req, res) {
+    let response = await astresControler.getAstreByID(req.params.astreID)
+    res.send(response)
+})
+
 app.post('/astre', async function(req, res) {
     let response = await astresControler.saveAstre(req.body)
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
     res.send(response)
 })
+
 
