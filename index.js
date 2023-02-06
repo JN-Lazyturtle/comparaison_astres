@@ -17,6 +17,7 @@ app.get('/', function(req, res) {
 
 app.get('/astres', async function(reg, res) {
     let response = await astresControler.getAllAstres()
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
     res.send(response)
 })
 
