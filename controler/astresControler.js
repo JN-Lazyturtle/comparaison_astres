@@ -13,7 +13,6 @@ async function saveAstre(astreData) {
         console.log("erreur controleur : " + err)
         return {code: "400", message: err.message}
     }
-    console.log("save : \n" + JSON.stringify(astre))
     return await connection.saveObject(astre, connection.astresUrl)
 }
 
