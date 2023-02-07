@@ -1,10 +1,14 @@
-class Astre{
+class Planete {
+
+    //Une planète doit être crée avec au minimum un nom, une catégorie et un auteur
     constructor(obj) {
-        obj = obj != null ? obj : {}
-        this.id = obj.id != null ? obj.id : ''
-        this.nom = obj.nom != null ? obj.nom : ''
-        this.categorie = obj.categorie != null ? obj.categorie : ''
-        this.auteur = obj.auteur != null ? obj.auteur : ''
+        if( !obj || Object.keys(obj).length === 0 ){
+            throw new Error("data was expected")
+        }
+        this._id = obj.id != null ? obj.id : ''
+        this.nom = obj.nom
+        this.categorie = obj.categorie
+        this.auteur = obj.auteur
         this.type = obj.type != null ? obj.type : ''
         this.taille = obj.taille != null ? obj.taille : ''
         this.distanceTerre = obj.distanceTerre != null ? obj.distanceTerre : ''
@@ -20,5 +24,5 @@ class Astre{
 }
 
 module.exports = {
-    Astre: Astre
+    Astre: Planete
 }
