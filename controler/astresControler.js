@@ -1,6 +1,6 @@
 const connexion = require('../DB/connexionDB')
 const {Astre} = require("../model/Astre");
-const fixtures = require("/fixtures")
+const fixtures = require("./fixtures")
 
 async function getAll() {
     return await connexion.getAllData(connexion.astresUrl)
@@ -21,7 +21,7 @@ async function getAstreById(astreID) {
     return await connexion.getByID(astreID)
 }
 
-export async function loadFixtures() {
+async function loadFixtures() {
     let astres = fixtures.getFixtures()
     return await connexion.saveObject(astres, connexion.astresUrl)
 }
