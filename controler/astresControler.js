@@ -1,18 +1,23 @@
-const connection = require('../DB/connectionDB')
-const {Astre} = require("../model/Astre");
+const connexion = require('../DB/connexionDB')
+const {Planete} = require("../model/Planete");
 
 async function getAll() {
-    return await connection.getAllData(connection.astresUrl)
+    return await connexion.getAllData(connexion.astresUrl)
 }
 
-async function saveAstre(astre) {
-    astre = new Astre(astre);
-    console.log("save : \n" + astre)
-    return await connection.saveObject(astre, connection.astresUrl)
+async function saveAstre(astreData) {
+    let astre
+    try {
+        astre = new Planete(astreData);
+    } catch (err){
+        console.log("erreur controleur : " + err)
+        return {code: "400", message: err.message}
+    }
+    return await connexion.saveObject(astre, connexion.astresUrl)
 }
 
 async function getAstreById(astreID) {
-    return await connection.getByID(astreID)
+    return await connexion.getByID(astreID)
 }
 
 module.exports = {

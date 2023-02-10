@@ -14,6 +14,7 @@ async function saveObject(object, collectionUrl) {
     config.data = object
     try {
         const response = await axios(config)
+        console.log("save : \n" + JSON.stringify(object))
         return {
             code: response.status,
             message: response.statusText

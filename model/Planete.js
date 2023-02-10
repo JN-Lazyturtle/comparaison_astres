@@ -1,10 +1,10 @@
-class Astre{
+const {AstreCommon} = require("./AstreCommon")
+
+class Planete {
+
     constructor(obj) {
-        obj = obj != null ? obj : {}
-        this.id = obj.id != null ? obj.id : ''
-        this.nom = obj.nom != null ? obj.nom : ''
-        this.categorie = obj.categorie != null ? obj.categorie : ''
-        this.auteur = obj.auteur != null ? obj.auteur : ''
+        // réutilisation du constructeur général de AstreCommon (avec des Throw erreurs si nécessaire)
+        Object.assign(this, new AstreCommon(obj))
         this.type = obj.type != null ? obj.type : ''
         this.taille = obj.taille != null ? obj.taille : ''
         this.distanceTerre = obj.distanceTerre != null ? obj.distanceTerre : ''
@@ -20,5 +20,5 @@ class Astre{
 }
 
 module.exports = {
-    Astre: Astre
+    Planete: Planete
 }
