@@ -24,6 +24,7 @@ class Astre {
         this.pesanteur = obj.pesanteur != null ? obj.pesanteur : ''
         this.temperatureMoyenne = obj.temperatureMoyenne != null ? obj.temperatureMoyenne : ''
         this.satellites = obj.satellites != null ? obj.satellites : []
+        this.immage = obj.immage != null ? obj.immage : ''
     }
 
 }
