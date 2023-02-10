@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
 
 app.get('/astres', async function(reg, res) {
     let response = await astresControler.getAllAstres()
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
+    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
@@ -28,6 +28,12 @@ app.get('/astreByID/:astreID', async function(req, res) {
 
 app.post('/astre', async function(req, res) {
     let response = await astresControler.saveAstre(req.body)
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.send(response)
+})
+
+app.post('/loadFixtures', async function(req, res) {
+    let response = await astresControler.loadFixtures()
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
