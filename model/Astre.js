@@ -1,10 +1,19 @@
-const {AstreCommon} = require("./AstreCommon")
+class Astre {
 
-class Planete {
-
+    //Un astre doit être crée avec au minimum un nom, une catégorie et un auteur
     constructor(obj) {
-        // réutilisation du constructeur général de AstreCommon (avec des Throw erreurs si nécessaire)
-        Object.assign(this, new AstreCommon(obj))
+        if( !obj || Object.keys(obj).length === 0 ){
+            throw new Error("data was expected")
+        }
+        this._id = obj.id
+        this.nom = obj.nom
+        this.categorie = obj.categorie
+        this.auteur = obj.auteur
+
+        if (!this.nom || !this.categorie || !this.auteur){
+            throw new Error("Any astre need at least a name, a category and an author")
+        }
+
         this.type = obj.type != null ? obj.type : ''
         this.taille = obj.taille != null ? obj.taille : ''
         this.distanceTerre = obj.distanceTerre != null ? obj.distanceTerre : ''
@@ -20,5 +29,5 @@ class Planete {
 }
 
 module.exports = {
-    Planete: Planete
+    Astre: Astre
 }
