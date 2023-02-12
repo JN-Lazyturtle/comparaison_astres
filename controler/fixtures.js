@@ -1,37 +1,39 @@
-const {Astre} = require("../model/Astre");
+const {Astre} = require("../model/Astre")
 
-function getFixtures(){
+function getFixtures() {
     return [
         getTerre(),
         getSaturne(),
-        getLeviathe()
+        getLeviathe(),
+        getMars()
     ]
 }
+
 function getSaturne() {
-       let data = {
-           "nom": "Saturne",
-           "categorie": "planete",
-           "auteur": "rouxy",
-           "type": "gazeuse",
-           "taille": 58232,
-           "distanceTerre": 8.6,
-           "distanceEtoile": 9.5,
-           "systemePlanetaire": "system solaire",
-           "etoile": "soleil",
-           "galaxie": "voie lactée",
-           "pesanteur": 10.44,
-           "temperatureMoyenne": -150,
-           "satellites": {
-               "1": "Titan",
-               "2": "Japet",
-               "3": "Rhéa",
-               "4": "Thétis",
-               "5": "Pandore"
-           },
-           "image": "https://starwalk.space/gallery/images/saturn-planet-guide/1140x641.jpg"
-       }
-       return new Astre(data)
-   }
+    let data = {
+        "nom": "Saturne",
+        "categorie": "planete",
+        "auteur": "rouxy",
+        "type": "gazeuse",
+        "taille": 58232,
+        "distanceTerre": 8.6,
+        "distanceEtoile": 9.5,
+        "systemePlanetaire": "system solaire",
+        "etoile": "soleil",
+        "galaxie": "voie lactée",
+        "pesanteur": 10.44,
+        "temperatureMoyenne": -150,
+        "satellites": {
+            "1": "Titan",
+            "2": "Japet",
+            "3": "Rhéa",
+            "4": "Thétis",
+            "5": "Pandore"
+        },
+        "image": "https://starwalk.space/gallery/images/saturn-planet-guide/1140x641.jpg"
+    }
+    return new Astre(data)
+}
 
 function getTerre() {
     let data = {
@@ -72,9 +74,31 @@ function getLeviathe() {
             "temperatureMoyenne": 10,
             "satellites": {
                 "1": "Lance-sondes orbital"
-            },
-            "image": "https://static.wikia.nocookie.net/outerwilds_gamepedia/images/7/77/Giant%27s_Deep.png/revision/latest?cb=20190718012339"
+            }
         }
+    return new Astre(data)
+}
+
+function getMars() {
+    let data = {
+        "nom": "Mars",
+        "categorie": "planete",
+        "auteur": "rouxy",
+        "type": "tellurique",
+        "taille": 3389.5,
+        "distanceTerre": 8.6,
+        "distanceEtoile": 1.38,
+        "systemePlanetaire": "system solaire",
+        "etoile": "soleil",
+        "galaxie": "voie lactée",
+        "pesanteur": 3.7,
+        "temperatureMoyenne": -63,
+        "satellites": {
+            "1": "Phobos",
+            "2": "Déimos"
+        },
+        "image": "https://www.slate.fr/sites/default/files/styles/1060x523/public/planet-volumes-4irvnspwk48-unsplash.jpg"
+    }
     return new Astre(data)
 }
 

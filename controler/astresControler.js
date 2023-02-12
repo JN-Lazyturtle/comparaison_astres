@@ -1,5 +1,5 @@
 const connexion = require('../DB/connexionDB')
-const {Astre} = require("../model/Astre");
+const {Astre} = require("../model/Astre")
 const fixtures = require("./fixtures")
 
 async function getAll() {
@@ -9,7 +9,7 @@ async function getAll() {
 async function saveAstre(astreData) {
     let astre
     try {
-        astre = new Astre(astreData);
+        astre = new Astre(astreData)
     } catch (err){
         console.log("erreur controleur : " + err)
         return {code: "400", message: err.message}
