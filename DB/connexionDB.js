@@ -58,10 +58,27 @@ async function getByID(astreID) {
     }
 }
 
+async function getByField(field, regexName) {
+    let config = DBconfig
+    config.method = 'get'
+    config.url = astresUrl+'?q={"'+field+'" : {"$regex" : "'+regexName+'"}}'
+    try {
+        const response = await axios(config)
+        console.log("https://astres-079d.restdb.io/rest"+astresUrl+'?q={"'+field+'" : {"$regex" : "'+regexName+'"}}')
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+
 module.exports = {
     astresUrl: astresUrl,
     utilisateursUrl: utilisateursUrl,
     saveObject: saveObject,
     getAllData: getAllData,
     getByID: getByID,
+    getByField: getByField
 }

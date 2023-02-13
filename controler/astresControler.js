@@ -21,6 +21,10 @@ async function getAstreById(astreID) {
     return await connexion.getByID(astreID)
 }
 
+async function getAstreByField(field, regexName) {
+    return await connexion.getByField(field, regexName)
+}
+
 async function loadFixtures() {
     let astres = fixtures.getFixtures()
     return await connexion.saveObject(astres, connexion.astresUrl)
@@ -30,5 +34,6 @@ module.exports = {
     getAllAstres: getAll,
     saveAstre: saveAstre,
     getAstreByID: getAstreById,
+    getAstreByField: getAstreByField,
     loadFixtures: loadFixtures
 }

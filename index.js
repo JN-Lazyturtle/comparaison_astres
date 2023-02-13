@@ -27,6 +27,12 @@ app.get('/astreByID/:astreID', async function(req, res) {
     res.send(response)
 })
 
+app.get('/astreByField/:field/:regex', async function(req, res) {
+    let response = await astresControler.getAstreByField(req.params.field, req.params.regex)
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.send(response)
+})
+
 app.post('/astre', async function(req, res) {
     let response = await astresControler.saveAstre(req.body)
     res.setHeader("Access-Control-Allow-Origin", "*")
