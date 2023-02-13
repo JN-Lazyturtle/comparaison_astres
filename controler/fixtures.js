@@ -74,7 +74,8 @@ function getLeviathe() {
             "temperatureMoyenne": 10,
             "satellites": {
                 "1": "Lance-sondes orbital"
-            }
+            },
+            "image":"https://vainkeurz.com/wp-content/uploads/2021/12/leviathe.jpg"
         }
     return new Astre(data)
 }
