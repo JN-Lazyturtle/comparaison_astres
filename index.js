@@ -12,7 +12,7 @@ app.listen(3000, function() {
 })
 
 app.get('/', function(req, res) {
-    res.send('Bienvenue sur Astres à comparer !')
+    res.send("Bienvenue sur l'API de Astres à comparer !")
 })
 
 app.get('/astres', async function(reg, res) {
@@ -23,6 +23,7 @@ app.get('/astres', async function(reg, res) {
 
 app.get('/astreByID/:astreID', async function(req, res) {
     let response = await astresControler.getAstreByID(req.params.astreID)
+    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
