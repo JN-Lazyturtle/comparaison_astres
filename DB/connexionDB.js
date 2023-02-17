@@ -74,11 +74,27 @@ async function getByField(field, regexName) {
     }
 }
 
+async function getUtilisateur(login) {
+    let config = DBconfig
+    config.method = 'get'
+    config.url = utilisateursUrl+'?q={"login": "'+login+'"}'
+    try {
+        const response = await axios(config)
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+
 module.exports = {
     astresUrl: astresUrl,
     utilisateursUrl: utilisateursUrl,
     saveObject: saveObject,
     getAllData: getAllData,
     getByID: getByID,
-    getByField: getByField
+    getByField: getByField,
+    getUtilisateur: getUtilisateur,
 }
