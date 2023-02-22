@@ -11,8 +11,8 @@ const jwtOptions = {
     secretOrKey: secret
 }
 
-const connexion = require("../DB/connexionDB");
-const {utilisateursUrl} = require("../DB/connexionDB");
+const connexion = require("../BD/connexionBD");
+const {utilisateursUrl} = require("../BD/connexionBD");
 
 async function createUtilisateur(infoUtilisateur) {
     return await connexion.saveObject(infoUtilisateur, utilisateursUrl)

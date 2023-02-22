@@ -1,4 +1,4 @@
-const connexion = require('../DB/connexionDB')
+const connexion = require('../BD/connexionBD')
 const {Astre} = require("../model/Astre")
 const fixtures = require("./fixtures")
 

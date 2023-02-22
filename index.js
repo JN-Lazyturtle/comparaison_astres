@@ -5,10 +5,10 @@ const app = express()
 app.use(express.json())
 
 // controlers
-const astresControler = require('./controler/astresControler')
+const astresControler = require('./controller/astreController')
 
-const {passport} = require("./controler/utilisateurController");
-const utilisateur = require("./controler/utilisateurController");
+const {passport} = require("./controller/utilisateurController");
+const utilisateur = require("./controller/utilisateurController");
 app.use(passport.initialize())
 app.use(express.json())
 
