@@ -2,13 +2,12 @@
 const express = require('express')
 const app = express()
 
-app.use(express.json())
-
 // controlers
 const astresControler = require('./controller/astreController')
-
 const {passport} = require("./controller/utilisateurController");
 const utilisateur = require("./controller/utilisateurController");
+
+// init
 app.use(passport.initialize())
 app.use(express.json())
 
