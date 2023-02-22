@@ -50,6 +50,8 @@ app.post('/loadFixtures', async function(req, res) {
     res.send(response)
 })
 
+// todo
+// creation de compte
 app.post('/signIn', async function(req, res) {
     let response = await utilisateur.saveUtilisateur(req.body)
     res.setHeader("Access-Control-Allow-Origin", "*")
@@ -65,4 +67,13 @@ app.post('/logIn', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
+
+// todo
+app.post('/deleteAstre', async (req, res) => {
+    //todo
+})
+app.post('/updateAstre', async (req, res) => {
+    //todo
+})
+
 
