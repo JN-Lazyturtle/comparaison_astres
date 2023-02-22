@@ -7,6 +7,12 @@ app.use(express.json())
 // controlers
 const astresControler = require('./controler/astresControler')
 
+const {passport} = require("./controler/utilisateurController");
+const utilisateur = require("./controler/utilisateurController");
+app.use(passport.initialize())
+app.use(express.json())
+
+
 app.listen(3000, function() {
     console.log('App listening on port 3000!')
 })
@@ -45,81 +51,19 @@ app.post('/loadFixtures', async function(req, res) {
     res.send(response)
 })
 
-app.post('/utilisateur', async function(req, res) {
-    console.log("utilisateur :" + JSON.stringify(req.body))
-    let response = await connexion.saveObject(req.body, utilisateursUrl)
+app.post('/signIn', async function(req, res) {
+    let response = await utilisateur.saveUtilisateur(req.body)
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
-
-
-const passport = require('passport')
-const jwt = require('jsonwebtoken')
-const passportJWT = require('passport-jwt')
-const connexion = require("./DB/connexionDB");
-const {utilisateursUrl} = require("./DB/connexionDB");
-const {json} = require("express");
-
-const secret = 'thisismysecret'
-const ExtractJwt = passportJWT.ExtractJwt
-const JwtStrategy = passportJWT.Strategy
-
-const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: secret
-}
-
-async function getUtilisateur(login) {
-    let userTab = await connexion.getUtilisateur(login)
-    if(userTab.length == 1) {
-        return userTab[0]
-    }
-
-}
-
-passport.use(
-    new JwtStrategy(jwtOptions, async function(payload, next) {
-        const user = await getUtilisateur(payload.login)
-
-        if (user) {
-            next(null, user)
-        } else {
-            next(null, false)
-        }
-    })
-)
-
-app.use(passport.initialize())
-
-app.use(express.json())
-
 app.get('/admin', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.send("vous accedez à l'éspace privé")
+    res.send("vous accedez à l'espace privé")
 })
 
-app.post('/login', async (req, res) => {
-    const login = req.body.login
-    const mdp = req.body.mdp
-
-
-    console.log(req.body)
-
-    if (!login || !mdp) {
-        res.status(401).json({ error: 'Email or password was not provided.' })
-        return
-    }
-
-    const user = await getUtilisateur(login)
-
-    if (!user || user.mdp !== mdp) {
-        res.status(401).json({ error: 'Email / password do not match.' })
-        return
-    }
-
-    const userJwt = jwt.sign({ login: user.login }, secret)
-
-    res.json({ jwt: userJwt })
+app.post('/logIn', async (req, res) => {
+    let response = await utilisateur.connexionUtilisateur(req.body.login, req.body.mdp)
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.send(response)
 })
-
 
