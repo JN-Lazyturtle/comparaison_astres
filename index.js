@@ -1,5 +1,6 @@
 // modules externes
 const express = require('express')
+const cors = require('cors');
 const app = express()
 
 // controlers
@@ -10,6 +11,7 @@ const utilisateur = require("./controller/utilisateurController");
 // init
 app.use(passport.initialize())
 app.use(express.json())
+app.use(cors())
 
 
 app.listen(3000, function() {
@@ -22,31 +24,26 @@ app.get('/', function(req, res) {
 
 app.get('/astres', async function(reg, res) {
     let response = await astresControler.getAllAstres()
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
 app.get('/astreByID/:astreID', async function(req, res) {
     let response = await astresControler.getAstreByID(req.params.astreID)
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
 app.get('/astreByField/:field/:regex', async function(req, res) {
     let response = await astresControler.getAstreByField(req.params.field, req.params.regex)
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
-app.post('/astre', async function(req, res) {
+app.post('/astre', cors(),  async function(req, res) {
     let response = await astresControler.saveAstre(req.body)
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
 app.post('/loadFixtures', async function(req, res) {
     let response = await astresControler.loadFixtures()
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
@@ -54,7 +51,6 @@ app.post('/loadFixtures', async function(req, res) {
 // creation de compte
 app.post('/signIn', async function(req, res) {
     let response = await utilisateur.saveUtilisateur(req.body)
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
@@ -64,7 +60,6 @@ app.get('/admin', passport.authenticate('jwt', { session: false }), (req, res) =
 
 app.post('/logIn', async (req, res) => {
     let response = await utilisateur.connexionUtilisateur(req.body.login, req.body.mdp)
-    res.setHeader("Access-Control-Allow-Origin", "*")
     res.send(response)
 })
 
