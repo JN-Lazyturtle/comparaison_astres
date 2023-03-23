@@ -15,13 +15,23 @@ const connexion = require("../BD/connexionBD");
 const {utilisateursUrl} = require("../BD/connexionBD");
 
 async function createUtilisateur(infoUtilisateur) {
-    return await connexion.saveObject(infoUtilisateur, utilisateursUrl)
+    if (infoUtilisateur.login === null || infoUtilisateur.mdp === null) {
+        return {code: "401", message: 'Login / password not provided.'}
+    }
+    const user = await readUtilisateur(infoUtilisateur.login)
+    if (user === null) {
+        return await connexion.saveObject(infoUtilisateur, utilisateursUrl)
+    } else {
+        return {code: "401", message: 'Login already taken.'}
+    }
 }
 
 async function readUtilisateur(login) {
     let userTab = await connexion.getUtilisateur(login)
     if(userTab.length === 1) {
         return userTab[0]
+    } else {
+        return null
     }
 }
 
@@ -38,13 +48,13 @@ passport.use(
 
 async function connectUtilisateur(login, mdp) {
     if (!login || !mdp) {
-        return {code: "401", message: 'Email or password was not provided.'}
+        return {code: "401", message: 'Login or password was not provided.'}
     }
 
     const user = await readUtilisateur(login)
 
     if (!user || user.mdp !== mdp) {
-        return {code: "401", message: 'Email / password do not match.'}
+        return {code: "401", message: 'Login / password do not match.'}
     }
 
     const userJwt = jwt.sign({ login: user.login }, secret)
