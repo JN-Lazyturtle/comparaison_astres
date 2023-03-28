@@ -58,7 +58,7 @@ async function connectUtilisateur(login, mdp) {
     }
 
     const userJwt = jwt.sign({ login: user.login }, secret)
-    return { jwt: userJwt }
+    return { token: userJwt }
 }
 
 
