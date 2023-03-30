@@ -37,7 +37,7 @@ app.get('/astreByField/:field/:regex', async function(req, res) {
     res.send(response)
 })
 
-app.post('/astre', cors(),  async function(req, res) {
+app.post('/astre', cors(), passport.authenticate('jwt', { session: false }), async function(req, res) {
     let response = await astresControler.saveAstre(req.body)
     res.send(response)
 })
