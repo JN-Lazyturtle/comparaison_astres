@@ -189,7 +189,7 @@ function getSombronce() {
         "pesanteur": 0,
         "temperatureMoyenne": -100,
         "satellites": {},
-        "image": "https://static.wikia.nocookie.net/outer-wilds/images/8/83/Dark_Bramble.png/revision/latest?cb=20211122185621&path-prefix=fr"
+        "image": "https://cdn.pixabay.com/photo/2021/07/10/05/36/explosion-6400669_960_720.jpg"
     }
     return new Astre(data)
 }
