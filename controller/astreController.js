@@ -7,7 +7,7 @@ async function getAll() {
     return await connexion.getAllData(connexion.astresUrl)
 }
 
-async function saveAstre(astreData) {
+async function saveAstre(astreData, token) {
     let astre
     try {
         astre = new Astre(astreData)
@@ -15,6 +15,8 @@ async function saveAstre(astreData) {
         console.log("erreur controleur : " + err)
         return {code: "400", message: err.message}
     }
+    let loginUser = await utilisateurController.extractLoginFromToken(token)
+    astre.auteur = loginUser
     return await connexion.saveObject(astre, connexion.astresUrl)
 }
 
