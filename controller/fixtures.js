@@ -80,25 +80,22 @@ function getLeviathe() {
     return new Astre(data)
 }
 
-function getMars() {
+function getSombronce() {
     let data = {
-        "nom": "Mars",
+        "nom": "Sombronce",
         "categorie": "planete",
-        "auteur": "rouxy",
-        "type": "tellurique",
-        "taille": 3389.5,
-        "distanceTerre": 8.6,
-        "distanceEtoile": 1.38,
-        "systemePlanetaire": "system solaire",
+        "auteur": "julie",
+        "type": "infini",
+        "taille": 1000,
+        "distanceTerre": 3000,
+        "distanceEtoile": 3001,
+        "systemePlanetaire": "outer wilds",
         "etoile": "soleil",
-        "galaxie": "voie lactée",
-        "pesanteur": 3.7,
-        "temperatureMoyenne": -63,
-        "satellites": {
-            "1": "Phobos",
-            "2": "Déimos"
-        },
-        "image": "https://www.slate.fr/sites/default/files/styles/1060x523/public/planet-volumes-4irvnspwk48-unsplash.jpg"
+        "galaxie": "galaxie outer wilds",
+        "pesanteur": 0,
+        "temperatureMoyenne": -100,
+        "satellites": {},
+        "image": "https://static.wikia.nocookie.net/outer-wilds/images/8/83/Dark_Bramble.png/revision/latest?cb=20211122185621&path-prefix=fr"
     }
     return new Astre(data)
 }
