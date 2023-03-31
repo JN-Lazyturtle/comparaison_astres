@@ -1,12 +1,12 @@
 // modules externes
 const express = require('express')
-const cors = require('cors');
+const cors = require('cors')
 const app = express()
 
 // controlers
 const astresControler = require('./controller/astreController')
-const {passport} = require("./controller/utilisateurController");
-const utilisateur = require("./controller/utilisateurController");
+const utilisateurControler = require("./controller/utilisateurController")
+const {passport} = require("./controller/utilisateurController")
 
 // init
 app.use(passport.initialize())
@@ -50,21 +50,20 @@ app.post('/astre', cors(), passport.authenticate('jwt', { session: false }), asy
 })
 
 app.post('/loadFixtures', async function(req, res) {
-    let response = await astresControler.loadFixtures()
+    let response = await utilisateurControler.loadFixture();
+    if (response.code === 201){
+        response = await astresControler.loadFixtures()
+    }
     res.send(response)
 })
 
 app.post('/signIn', async function(req, res) {
-    let response = await utilisateur.saveUtilisateur(req.body)
+    let response = await utilisateurControler.saveUtilisateur(req.body)
     res.send(response)
 })
 
-// app.get('/admin', passport.authenticate('jwt', { session: false }), (req, res) => {
-//     res.send("vous accedez à l'espace privé")
-// })
-
 app.post('/logIn', async (req, res) => {
-    let response = await utilisateur.connexionUtilisateur(req.body.login, req.body.mdp)
+    let response = await utilisateurControler.connexionUtilisateur(req.body.login, req.body.mdp)
     res.send(response)
 })
 
