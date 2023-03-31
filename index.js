@@ -37,6 +37,11 @@ app.get('/astreByField/:field/:regex', async function(req, res) {
     res.send(response)
 })
 
+app.get('/astreByAuteur/:auteur', async function(req, res) {
+    let response = await astresControler.getAstreByAuteur(req.params.auteur)
+    res.send(response)
+})
+
 app.post('/astre', cors(), passport.authenticate('jwt', { session: false }), async function(req, res) {
     const tokenHeader = req.headers.authorization;
     const token = tokenHeader.split(' ')[1];
@@ -49,27 +54,28 @@ app.post('/loadFixtures', async function(req, res) {
     res.send(response)
 })
 
-// todo
-// creation de compte
 app.post('/signIn', async function(req, res) {
     let response = await utilisateur.saveUtilisateur(req.body)
     res.send(response)
 })
 
-app.get('/admin', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.send("vous accedez à l'espace privé")
-})
+// app.get('/admin', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     res.send("vous accedez à l'espace privé")
+// })
 
 app.post('/logIn', async (req, res) => {
     let response = await utilisateur.connexionUtilisateur(req.body.login, req.body.mdp)
     res.send(response)
 })
 
-// todo
-app.post('/deleteAstre', async (req, res) => {
-    //todo
+app.delete('/deleteAstre/:astreId',  passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const tokenHeader = req.headers.authorization;
+    const token = tokenHeader.split(' ')[1];
+    let response = await astresControler.deleteAstre(req.params.astreId, token)
+    res.send(response)
 })
-app.put('/updateAstre',  passport.authenticate('jwt', { session: false }), async (req, res) => {
+
+app.put('/updateAstre/',  passport.authenticate('jwt', { session: false }), async (req, res) => {
     const tokenHeader = req.headers.authorization;
     const token = tokenHeader.split(' ')[1];
     let response = await  astresControler.update(req.body, token)
