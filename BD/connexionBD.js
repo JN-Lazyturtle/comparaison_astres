@@ -1,8 +1,10 @@
 const axios = require('axios')
 
 const DBconfig = {
-    baseURL: 'https://astres-079d.restdb.io/rest',
-    headers: {'x-apikey': 'b69a8b7ca1ca6ab24c74b32cea21d2d32955f'},
+    // baseURL: 'https://astres-079d.restdb.io/rest',
+    // headers: {'x-apikey': 'b69a8b7ca1ca6ab24c74b32cea21d2d32955f'},
+    baseURL: 'https://tpnodejs-cb8c.restdb.io/rest',
+    headers: {'x-apikey': 'a503d0f2cdb04435208adce951723b882f84f'},
 }
 const astresUrl = '/astres'
 const utilisateursUrl = '/utilisateurs'
@@ -95,8 +97,8 @@ async function getByField(field, regexName) {
 
 async function deleteObject(objectID, collectionURL) {
     let config = DBconfig
-    config.method = 'delete' + '/' + objectID
-    config.url = collectionURL
+    config.method = 'delete'
+    config.url = collectionURL + '/' + objectID
     try {
         const response = await axios(config)
         return response.data

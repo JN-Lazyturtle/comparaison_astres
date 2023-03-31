@@ -66,8 +66,8 @@ app.post('/logIn', async (req, res) => {
     res.send(response)
 })
 
-app.post('/deleteAstre', async (req, res) => {
-    let response = await astresControler.deleteAstre(req.body)
+app.delete('/deleteAstre/:astreId', async (req, res) => {
+    let response = await astresControler.deleteAstre(req.params.astreId)
     res.send(response)
 })
 
