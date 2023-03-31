@@ -1,6 +1,7 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const passportJWT = require('passport-jwt')
+const fixture = require('./fixtures')
 
 const secret = 'thisismysecret'
 const ExtractJwt = passportJWT.ExtractJwt
@@ -61,6 +62,10 @@ async function connectUtilisateur(login, mdp) {
     return { token: userJwt }
 }
 
+async function loadFixture(){
+    return await connexion.saveObject(fixture.getUserFixture() ,connexion.utilisateursUrl)
+}
+
 async function extractLoginFromToken(token){
     let decodedToken = await jwt.verify(token, secret)
     return decodedToken.login
@@ -72,4 +77,5 @@ module.exports = {
     passport: passport,
     connexionUtilisateur: connectUtilisateur,
     extractLoginFromToken,
+    loadFixture
 }

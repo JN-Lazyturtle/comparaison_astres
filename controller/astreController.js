@@ -60,7 +60,7 @@ async function getAstreByAuteur(auteur) {
 }
 
 async function loadFixtures() {
-    let astres = fixtures.getFixtures()
+    let astres = fixtures.getAstresFixtures()
     return await connexion.saveObject(astres, connexion.astresUrl)
 }
 
