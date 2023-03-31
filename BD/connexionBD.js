@@ -9,12 +9,31 @@ const utilisateursUrl = '/utilisateurs'
 
 async function saveObject(object, collectionUrl) {
     let config = DBconfig
-    config.method = 'post'
+    config.method = 'put'
     config.url = collectionUrl
     config.data = object
     try {
         const response = await axios(config)
         console.log("save : \n" + JSON.stringify(object))
+        return {
+            code: response.status,
+            message: response.statusText
+        }
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+async function updateObject(object, objectId, collectionUrl) {
+    let config = DBconfig
+    config.method = 'post'
+    config.url = collectionUrl + "/"+ objectId
+    config.data = object
+    try {
+        const response = await axios(config)
+        console.log("updated : \n" + JSON.stringify(object))
         return {
             code: response.status,
             message: response.statusText
@@ -93,8 +112,10 @@ module.exports = {
     astresUrl: astresUrl,
     utilisateursUrl: utilisateursUrl,
     saveObject: saveObject,
+    updateObject: updateObject,
     getAllData: getAllData,
     getByID: getByID,
     getByField: getByField,
     getUtilisateur: getUtilisateur,
+
 }

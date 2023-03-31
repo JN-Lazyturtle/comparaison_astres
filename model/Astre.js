@@ -5,7 +5,7 @@ class Astre {
         if( !obj || Object.keys(obj).length === 0 ){
             throw new Error("data was expected")
         }
-        this._id = obj.id
+        this._id = obj._id
         this.nom = obj.nom
         this.categorie = obj.categorie
         this.auteur = obj.auteur

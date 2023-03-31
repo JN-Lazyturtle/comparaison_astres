@@ -17,6 +17,21 @@ async function saveAstre(astreData) {
     return await connexion.saveObject(astre, connexion.astresUrl)
 }
 
+async function updateAstre(astreData) {
+    let astre
+    try {
+        astre = new Astre(astreData)
+    } catch (err){
+        console.log("erreur controleur : " + err)
+        return {code: "400", message: err.message}
+    }
+    if ( !astre._id ){
+        console.log("erreur controleur : astre object need an _id field to be updated")
+        return {code: "400", message: "astre object need an _id field to be updated"}
+    }
+    return await connexion.updateObject(astre, astre._id, connexion.astresUrl)
+}
+
 async function getAstreById(astreID) {
     return await connexion.getByID(astreID)
 }
@@ -35,5 +50,6 @@ module.exports = {
     saveAstre: saveAstre,
     getAstreByID: getAstreById,
     getAstreByField: getAstreByField,
-    loadFixtures: loadFixtures
+    loadFixtures: loadFixtures,
+    update: updateAstre
 }

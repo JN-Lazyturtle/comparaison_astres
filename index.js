@@ -67,8 +67,9 @@ app.post('/logIn', async (req, res) => {
 app.post('/deleteAstre', async (req, res) => {
     //todo
 })
-app.post('/updateAstre', async (req, res) => {
-    //todo
+app.put('/updateAstre', async (req, res) => {
+    let response = await  astresControler.update(req.body)
+    res.send(response)
 })
 
 
