@@ -66,8 +66,10 @@ app.post('/logIn', async (req, res) => {
     res.send(response)
 })
 
-app.delete('/deleteAstre/:astreId', async (req, res) => {
-    let response = await astresControler.deleteAstre(req.params.astreId)
+app.delete('/deleteAstre/:astreId',  passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const tokenHeader = req.headers.authorization;
+    const token = tokenHeader.split(' ')[1];
+    let response = await astresControler.deleteAstre(req.params.astreId, token)
     res.send(response)
 })
 
