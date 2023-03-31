@@ -93,6 +93,21 @@ async function getByField(field, regexName) {
     }
 }
 
+async function deleteObject(objectID, collectionURL) {
+    let config = DBconfig
+    config.method = 'delete' + '/' + objectID
+    config.url = collectionURL
+    try {
+        const response = await axios(config)
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+
 async function getUtilisateur(login) {
     let config = DBconfig
     config.method = 'get'
@@ -108,6 +123,22 @@ async function getUtilisateur(login) {
     }
 }
 
+async function getAstresByAuteur(auteur) {
+    let config = DBconfig
+    config.method = 'get'
+    config.url = astresUrl+'?q={"auteur": "'+auteur+'"}'
+    try {
+        const response = await axios(config)
+        return response.data
+    } catch (e) {
+        return {
+            code: e.response.status,
+            message: e.response.statusText
+        }
+    }
+}
+
+
 module.exports = {
     astresUrl: astresUrl,
     utilisateursUrl: utilisateursUrl,
@@ -117,5 +148,6 @@ module.exports = {
     getByID: getByID,
     getByField: getByField,
     getUtilisateur: getUtilisateur,
-
+    deleteObject: deleteObject,
+    getAstresByAuteur: getAstresByAuteur,
 }

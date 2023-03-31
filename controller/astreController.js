@@ -53,9 +53,17 @@ async function getAstreByField(field, regexName) {
     return await connexion.getByField(field, regexName)
 }
 
+async function getAstreByAuteur(auteur) {
+    return await connexion.getAstresByAuteur(auteur)
+}
+
 async function loadFixtures() {
     let astres = fixtures.getFixtures()
     return await connexion.saveObject(astres, connexion.astresUrl)
+}
+
+async function deleteAstre(astreID) {
+    return await connexion.deleteObject(astreID, connexion.astresUrl)
 }
 
 module.exports = {
@@ -64,5 +72,7 @@ module.exports = {
     getAstreByID: getAstreById,
     getAstreByField: getAstreByField,
     loadFixtures: loadFixtures,
-    update: updateAstre
+    update: updateAstre,
+    deleteAstre: deleteAstre,
+    getAstreByAuteur: getAstreByAuteur,
 }
