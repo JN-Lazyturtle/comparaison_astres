@@ -67,8 +67,10 @@ app.post('/logIn', async (req, res) => {
 app.post('/deleteAstre', async (req, res) => {
     //todo
 })
-app.put('/updateAstre', async (req, res) => {
-    let response = await  astresControler.update(req.body)
+app.put('/updateAstre',  passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const tokenHeader = req.headers.authorization;
+    const token = tokenHeader.split(' ')[1];
+    let response = await  astresControler.update(req.body, token)
     res.send(response)
 })
 

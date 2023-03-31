@@ -9,7 +9,7 @@ const utilisateursUrl = '/utilisateurs'
 
 async function saveObject(object, collectionUrl) {
     let config = DBconfig
-    config.method = 'put'
+    config.method = 'post'
     config.url = collectionUrl
     config.data = object
     try {
@@ -28,7 +28,7 @@ async function saveObject(object, collectionUrl) {
 }
 async function updateObject(object, objectId, collectionUrl) {
     let config = DBconfig
-    config.method = 'post'
+    config.method = 'put'
     config.url = collectionUrl + "/"+ objectId
     config.data = object
     try {

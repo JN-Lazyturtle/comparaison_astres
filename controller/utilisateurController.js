@@ -61,9 +61,15 @@ async function connectUtilisateur(login, mdp) {
     return { token: userJwt }
 }
 
+async function extractLoginFromToken(token){
+    let decodedToken = await jwt.verify(token, secret)
+    return decodedToken.login
+}
+
 
 module.exports = {
     saveUtilisateur: createUtilisateur,
     passport: passport,
     connexionUtilisateur: connectUtilisateur,
+    extractLoginFromToken,
 }
