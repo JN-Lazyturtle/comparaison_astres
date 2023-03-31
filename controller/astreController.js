@@ -55,9 +55,33 @@ async function getAstreByField(field, regexName) {
     return await connexion.getByField(field, regexName)
 }
 
+async function getAstreByAuteur(auteur) {
+    return await connexion.getAstresByAuteur(auteur)
+}
+
 async function loadFixtures() {
     let astres = fixtures.getFixtures()
     return await connexion.saveObject(astres, connexion.astresUrl)
+}
+
+async function deleteAstre(astreID, token) {
+    if ( !astreID){
+        console.log("erreur controleur : astre object need an _id field to be updated")
+        return {code: "400", message: "astre object need an _id field to be updated"}
+    }
+
+    let astreToDelete = await this.getAstreByID(astreID)
+    if ( !astreToDelete || astreToDelete === {} ){
+        console.log("erreur controleur : given id doesn't match to any existing astre")
+        return {code: "404", message: "given id doesn't match to any existing astre"}
+    }
+
+    let loginUser = await utilisateurController.extractLoginFromToken(token)
+    if ( ! astreToDelete.auteur || astreToDelete.auteur !== loginUser){
+        console.log("erreur controleur : you need to be the author of an astre to update it")
+        return {code: "404", message: "you need to be the author of an astre to update it"}
+    }
+    return await connexion.deleteObject(astreID, connexion.astresUrl)
 }
 
 module.exports = {
@@ -66,5 +90,7 @@ module.exports = {
     getAstreByID: getAstreById,
     getAstreByField: getAstreByField,
     loadFixtures: loadFixtures,
-    update: updateAstre
+    update: updateAstre,
+    deleteAstre: deleteAstre,
+    getAstreByAuteur: getAstreByAuteur,
 }
