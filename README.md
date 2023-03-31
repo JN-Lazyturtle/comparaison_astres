@@ -15,6 +15,8 @@ Comme indiqué en cours nous hébergons nos données sur restDB, que nous requê
 
 Nous avons une table utilisateurs et une table astres.
 
+Il existe des fixtures qui peuvent être charger dans la BD avec la route `loadFixtures`
+
 ### Architecture
 - index.js : classe principal dont le but est de définir les routes et d'extraire les argument des requêtes
 - controller : un controller par table de BD, gère les règles métiers (notamment les vérifications)
