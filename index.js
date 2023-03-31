@@ -43,7 +43,9 @@ app.get('/astreByAuteur/:auteur', async function(req, res) {
 })
 
 app.post('/astre', cors(), passport.authenticate('jwt', { session: false }), async function(req, res) {
-    let response = await astresControler.saveAstre(req.body)
+    const tokenHeader = req.headers.authorization;
+    const token = tokenHeader.split(' ')[1];
+    let response = await astresControler.saveAstre(req.body, token)
     res.send(response)
 })
 
